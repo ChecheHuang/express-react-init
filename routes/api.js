@@ -1,11 +1,7 @@
-const express = require('express')
-const router = express.Router()
-const connection = require('../utils/db')
+const express = require('express');
+const router = express.Router();
+const { sample } = require('../controller/sampleController');
 
-router.get('/users', async (req, res) => {
-  let queryResults = await connection.queryAsync('SELECT * FROM users;')
+router.get('/', sample);
 
-  res.json(queryResults)
-})
-
-module.exports = router
+module.exports = router;
