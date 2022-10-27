@@ -2,12 +2,18 @@
 ```
 npm i
 ```
+```
+.env_example複製改為.env
+```
 # step 2
 ```
 cd client
 ```
 ```
 npm i
+```
+```
+.env_example複製改為.env
 ```
 
 # step 3
