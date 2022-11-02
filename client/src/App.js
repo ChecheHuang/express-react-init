@@ -1,7 +1,7 @@
-import React from 'react';
-import './app.scss';
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-import Page1 from './page/Page1';
+import React from 'react'
+import './app.scss'
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
+import Page1 from './page/Page1'
 function App() {
   return (
     <Router>
@@ -10,7 +10,7 @@ function App() {
         <Route path="/page1" element={<Page1 />} />
       </Routes>
     </Router>
-  );
+  )
 }
 
-export default App;
+export default App

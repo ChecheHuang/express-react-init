@@ -1,11 +1,11 @@
-import { updateStart, updateSuccess, updateError } from './userSlice';
-import axios from 'axios';
-export const updateUser = async (url, data, dispatch) => {
-  dispatch(updateStart());
+import { updateStart, updateSuccess, updateError } from './titleSlice'
+import axios from 'axios'
+export const updateTitle = async (url, data, dispatch) => {
+  dispatch(updateStart())
   try {
-    // const res = await axios.default.post(url, data)
-    dispatch(updateSuccess(data));
+    const res = await axios.post(url, data)
+    dispatch(updateSuccess(res.data.title))
   } catch (err) {
-    dispatch(updateError());
+    dispatch(updateError())
   }
-};
+}
