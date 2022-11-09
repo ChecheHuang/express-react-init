@@ -9,15 +9,22 @@ const useAxios = (url, parameter) => {
 
   useEffect(() => {
     ;(async () => {
+      const cancelToken = axios.CancelToken.source()
       setIsPending(false)
       try {
-        const result = await axios.get(url, parameter)
+        const result = await axios.post(url, parameter, {
+          cancelToken: cancelToken.token,
+        })
         setData(result.data)
         setIsPending(true)
         setError(null)
       } catch (err) {
-        setIsPending(true)
-        setError(err.message)
+        if (axios.isCanncel(err)) {
+          console.log('canceled!')
+        } else {
+          setIsPending(true)
+          setError(err.message)
+        }
       }
     })()
     // eslint-disable-next-line react-hooks/exhaustive-deps
