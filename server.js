@@ -1,17 +1,21 @@
-const connection = require('./utils/db');
 require('dotenv').config();
 const express = require('express');
 const path = require('path');
 const app = express();
 const cors = require('cors');
 app.use(cors());
-app.use(express.urlencoded({ extended: false }));
+const bodyParser = require('body-parser');
+app.use(bodyParser.urlencoded({ extended: false }));
+app.use(bodyParser.json());
 app.use(express.json());
 app.use(express.static(path.join(__dirname, '/public')));
 
 let apiRouter = require('./routes/api');
 app.use('/api', apiRouter);
 
+app.get('/*', function (req, res) {
+  res.sendFile(path.join(__dirname, 'public', 'index.html'));
+});
 app.post('/webhook', function (req, res) {
   const exec = require('child_process').exec;
   exec('sh webhook.sh', (error, stdout, stderr) => {
@@ -36,6 +40,5 @@ app.use(function (err, req, res) {
 const port = process.env.PORT || 5000;
 
 app.listen(port, async function () {
-  await connection.connectAsync();
-  console.log('listening on port ' + port);
+  console.log('listening on ' + 'http://localhost:' + port);
 });

@@ -1,7 +1,10 @@
 const express = require('express');
 const router = express.Router();
-const { sample } = require('../controller/sampleController');
+const tokenMiddleware = require('../middleware/tokenMiddleware');
+const { login } = require('../controller/memberController');
 
-router.get('/', sample);
-
+router.get('/login', login);
+router.get('/test', tokenMiddleware, (req, res) => {
+  res.json(req.user);
+});
 module.exports = router;
